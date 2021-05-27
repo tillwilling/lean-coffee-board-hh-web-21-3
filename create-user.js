@@ -4,30 +4,31 @@ writeToDatabase()
 
 async function writeToDatabase() {
   const mongodb = require('mongodb')
+  let client
 
-  const client = await mongodb
-    .connect('mongodb://localhost', {
+  try {
+    client = await mongodb.connect('mongodb://localhost', {
       useUnifiedTopology: true,
     })
-    .catch(error => {
-      console.error(error)
-      process.exit(1)
-    })
+  } catch (error) {
+    console.error(error)
+    process.exit(1)
+  }
 
   const db = client.db('lean-coffee-board')
 
-  const response = await db
-    .collection('users')
-    .insertOne({ name, age, email })
-    .catch(error => {
-      console.error(error)
-      client.close()
-      process.exit(1)
-    })
+  try {
+    const response = await db
+      .collection('users')
+      .insertOne({ name, age, email })
 
-  console.log(
-    `SUCCESS: Inserted ${name}, ${age}, ${email} with ObjectId "${response.insertedId}"`
-  )
-
-  client.close()
+    console.log(
+      `SUCCESS: Inserted ${name}, ${age}, ${email} with ObjectId "${response.insertedId}"`
+    )
+    client.close()
+  } catch (error) {
+    console.error(error)
+    client.close()
+    process.exit(1)
+  }
 }
