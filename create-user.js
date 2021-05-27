@@ -1,18 +1,33 @@
 const [name, age, email] = process.argv.slice(2)
 
-const mongodb = require('mongodb')
-mongodb
-  .connect('mongodb://localhost', { useUnifiedTopology: true })
-  .then(client => {
-    const db = client.db('lean-coffee-board')
-    db.collection('users')
-      .insertOne({ name, age, email })
-      .then(res => {
-        console.log(
-          `SUCCESS: Inserted ${name}, ${age}, ${email} with ObjectId "${res.insertedId}"`
-        )
-      })
-      .catch(console.error)
-      .finally(() => client.close())
-  })
-  .catch(console.error)
+writeToDatabase()
+
+async function writeToDatabase() {
+  const mongodb = require('mongodb')
+
+  const client = await mongodb
+    .connect('mongodb://localhost', {
+      useUnifiedTopology: true,
+    })
+    .catch(error => {
+      console.error(error)
+      process.exit(1)
+    })
+
+  const db = client.db('lean-coffee-board')
+
+  const response = await db
+    .collection('users')
+    .insertOne({ name, age, email })
+    .catch(error => {
+      console.error(error)
+      client.close()
+      process.exit(1)
+    })
+
+  console.log(
+    `SUCCESS: Inserted ${name}, ${age}, ${email} with ObjectId "${response.insertedId}"`
+  )
+
+  client.close()
+}
