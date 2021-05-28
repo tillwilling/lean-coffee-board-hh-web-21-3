@@ -1,0 +1,9 @@
+### Install the VSCode extension "REST Client"
+### (https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+
+### GET /
+GET http://localhost:4000
+
+
+### GET /foo
+GET http://localhost:4000/foo
