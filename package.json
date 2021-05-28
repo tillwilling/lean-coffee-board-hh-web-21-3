@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js ",
+    "dev": "nodemon server.js",
     "create-user": "node create-user.js 'Test User' 99 'test@testuser.com'",
     "build:create-user": "npm run shebang:create-user && npm run chmod:create-user",
     "shebang:create-user": "echo '#!/usr/bin/env node' > bin/create-user && cat create-user.js >> bin/create-user",
@@ -25,7 +25,6 @@
     "uuid": "8.3.2"
   },
   "devDependencies": {
-    "@types/node": "15.6.1",
     "nodemon": "2.0.7"
   }
 }

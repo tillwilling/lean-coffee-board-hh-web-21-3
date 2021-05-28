@@ -5,7 +5,7 @@ const router = express.Router()
 let users = [
   {
     name: 'Jane Doe',
-    age: 32,
+    age: 33,
     email: 'jane@doe.com',
     id: '0',
   },
@@ -17,23 +17,23 @@ let users = [
   },
 ]
 
-router.get('/', async (req, res, next) => {
+router.get('/', (req, res, next) => {
   res.json(users)
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   const { id } = req.params
   const foundUser = users.find(user => user.id === id)
   foundUser ? res.json(foundUser) : next()
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', (req, res, next) => {
   const newUser = { ...req.body, id: uuidv4() }
   users.push(newUser)
   res.status(201).json(newUser)
 })
 
-router.patch('/:id', async (req, res, next) => {
+router.patch('/:id', (req, res, next) => {
   const { id } = req.params
 
   const index = users.findIndex(user => user.id === id)
@@ -43,7 +43,7 @@ router.patch('/:id', async (req, res, next) => {
   res.json(updatedUser)
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
   const { id } = req.params
   users = users.filter(user => user.id !== id)
   res.sendStatus(204)
