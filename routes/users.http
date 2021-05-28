@@ -19,7 +19,8 @@ Content-Type: application/json
 {
   "name": "Max Mustermann",
   "age": 42,
-  "email": "maxmustermann1979@gmx.de"
+  "email": "maxmustermann1979@gmx.de",
+  "meal": "I am ignored"
 }
 
 ### PATCH a user
