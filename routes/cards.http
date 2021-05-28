@@ -7,7 +7,7 @@
 GET {{baseUrl}}/api/cards
 
 ### GET a single card
-GET {{baseUrl}}/api/cards/1
+GET {{baseUrl}}/api/cards/60b0fbe28e46a355f71451ca
 
 ### GET a not existing card (404)
 GET {{baseUrl}}/api/cards/2000
@@ -17,13 +17,12 @@ POST http://localhost:4000/api/cards
 Content-Type: application/json
 
 {
-  "text": "What is mongoose",
-  "votes": 0,
+  "text": "What is mongoose again?",
   "author": "Jerry"
 }
 
 ### PATCH a single card
-PATCH {{baseUrl}}/api/cards/1
+PATCH {{baseUrl}}/api/cards/60b0fbf98e46a355f71451cb
 Content-Type: application/json
 
 {
