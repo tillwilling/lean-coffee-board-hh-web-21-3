@@ -5,5 +5,5 @@
 GET http://localhost:4000
 
 
-### GET /foo
-GET http://localhost:4000/foo
+### GET /users
+GET http://localhost:4000/users

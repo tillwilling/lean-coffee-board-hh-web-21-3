@@ -1,19 +1,18 @@
-// this comes with node.js
-// no need to use 'https'
-// – the server will run on a plattform that adds the security layer
 const http = require('http')
 
-const server = http.createServer(onRequest) // create the server
-server.listen(4000) // start the server
-
-// this is called on every request
-// req - an object that represents the request (with props/methods)
-// res - an object representing the response (with props/methods)
+const server = http.createServer(onRequest)
+server.listen(4000)
 
 function onRequest(req, res) {
-  // examples of what is in a request
-  console.log(req.method, req.url)
+  if (req.url === '/') {
+    res.end(`Please visit /users to get user data.`)
+  }
 
-  // Sending a response
-  res.end(`You requested ${req.url} via ${req.method}`)
+  if (req.url === '/users') {
+    const users = [
+      { name: 'Jane Doe', age: 32, email: 'jane@doe.com' },
+      { name: 'John Doe', age: 31, email: 'john@doe.com' },
+    ]
+    res.end(JSON.stringify(users))
+  }
 }
