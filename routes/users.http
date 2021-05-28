@@ -19,8 +19,16 @@ Content-Type: application/json
 {
   "name": "Max Mustermann",
   "age": 42,
-  "email": "maxmustermann1979@gmx.de",
+  "email": "x@mm.com",
   "meal": "I am ignored"
+}
+### ERROR: POST a new user with missing name
+POST http://localhost:4000/api/users
+Content-Type: application/json
+
+{
+  "age": 42,
+  "email": "maxmustermann1979@gmx.de"
 }
 
 ### PATCH a user
