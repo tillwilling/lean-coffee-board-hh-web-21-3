@@ -2,12 +2,12 @@
 ### (https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
 
 @baseUrl = http://localhost:4000
-
+@validUserId = 60b1070381c3abbe79f23381
 ### GET all users
 GET {{baseUrl}}/api/users
 
 ### GET a single user
-GET {{baseUrl}}/api/users/0
+GET {{baseUrl}}/api/users/{{validUserId}}
 
 ### GET a non existing user (404)
 GET {{baseUrl}}/api/users/2000
@@ -32,7 +32,7 @@ Content-Type: application/json
 }
 
 ### PATCH a user
-PATCH {{baseUrl}}/api/users/1
+PATCH {{baseUrl}}/api/users/{{validUserId}}
 Content-Type: application/json
 
 {
@@ -41,4 +41,4 @@ Content-Type: application/json
 }
 
 ### DELETE a user
-DELETE {{baseUrl}}/api/users/1
+DELETE {{baseUrl}}/api/users/60b109bb4434b86563a163fb
