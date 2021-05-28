@@ -1,7 +1,8 @@
 const express = require('express')
+const uuidv4 = require('uuid').v4
 const router = express.Router()
 
-const users = [
+let users = [
   {
     name: 'Jane Doe',
     age: 32,
@@ -23,20 +24,29 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   const { id } = req.params
   const foundUser = users.find(user => user.id === id)
-  foundUser
-    ? res.json(foundUser)
-    : next(new Error(`No user with id ${id} found`))
+  foundUser ? res.json(foundUser) : next()
+})
+
+router.post('/', async (req, res, next) => {
+  const newUser = { ...req.body, id: uuidv4() }
+  users.push(newUser)
+  res.status(201).json(newUser)
+})
+
+router.patch('/:id', async (req, res, next) => {
+  const { id } = req.params
+
+  const index = users.findIndex(user => user.id === id)
+  const user = users[index]
+  const updatedUser = { ...user, ...req.body }
+  users.splice(index, 1, updatedUser)
+  res.json(updatedUser)
 })
 
 router.delete('/:id', async (req, res, next) => {
   const { id } = req.params
-  res.json(users.filter(user => user.id !== id))
-})
-
-router.post('/', async (req, res, next) => {
-  const newUser = { ...req.body, id: users.length.toString() }
-  users.push(newUser)
-  res.json(newUser)
+  users = users.filter(user => user.id !== id)
+  res.sendStatus(204)
 })
 
 module.exports = router

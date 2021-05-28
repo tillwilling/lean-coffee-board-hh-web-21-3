@@ -22,5 +22,14 @@ Content-Type: application/json
   "email": "maxmustermann1979@gmx.de"
 }
 
-### GET /users
-GET {{baseUrl}}/users
+### PATCH /api/users/1
+PATCH {{baseUrl}}/api/users/1
+Content-Type: application/json
+
+{
+  "name": "Jack Doe",
+  "email": "jack@doe.com"
+}
+
+### DELETE /api/users/1
+DELETE {{baseUrl}}/api/users/1
