@@ -2,25 +2,27 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/User')
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
+  const { count, sort } = req.query
+  console.log('Query params', count, sort)
   res.json(await User.find())
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', async (req, res) => {
   const { id } = req.params
   res.json(await User.findById(id))
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', async (req, res) => {
   res.status(201).json(await User.create(req.body))
 })
 
-router.patch('/:id', async (req, res, next) => {
+router.patch('/:id', async (req, res) => {
   const { id } = req.params
   res.json(await User.findByIdAndUpdate(id, req.body, { new: true }))
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', async (req, res) => {
   const { id } = req.params
 
   res.status(204).json(await User.findByIdAndDelete(id))

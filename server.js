@@ -13,7 +13,7 @@ mongoose
 const app = express()
 
 // add middleware for json data
-app.use('/', express.json())
+app.use('/', express.json()) // (req, res, next) => {...}
 app.use('/api/users', require('./routes/users'))
 app.use('/api/cards', require('./routes/cards'))
 
